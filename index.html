@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Container</title>
+<style>
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: right;
+}
+</style>
+</head>
+<body>
+
+<h1>My to do list</h1>
+
+<label for="title">List:</label><br>
+<input type="text" id="title"><br><br>
+
+<label for="content">Description:</label><br>
+<textarea id="content" rows="4" cols="50"></textarea><br><br>
+
+<button id="addBtn">Add</button>
+
+<div id="cardContainer"></div>
+
+<script>
+document.getElementById("addBtn").addEventListener("click", addCard);
+
+function addCard() {
+  var title = document.getElementById("title").value;
+  var content = document.getElementById("content").value;
+
+  if (title.trim() === "" || content.trim() === "") {
+    alert("Please enter both title and content.");
+    return;
+  }
+
+  var cardContainer = document.getElementById("cardContainer");
+
+  var card = document.createElement("div");
+  card.className = "card";
+
+  var titleElement = document.createElement("h3");
+  titleElement.textContent = title;
+
+  var contentElement = document.createElement("p");
+  contentElement.textContent = content;
+
+  var deleteButton = document.createElement("button");
+  deleteButton.className = "delete-btn";
+  deleteButton.textContent = "Delete";
+  deleteButton.addEventListener("click", function() {
+    card.remove();
+  });
+
+  card.appendChild(titleElement);
+  card.appendChild(contentElement);
+  card.appendChild(deleteButton);
+
+  cardContainer.appendChild(card);
+
+  // Clear input fields
+  document.getElementById("title").value = "";
+  document.getElementById("content").value = "";
+}
+</script>
+
+</body>
+</html>
